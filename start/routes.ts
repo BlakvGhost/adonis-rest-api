@@ -20,5 +20,16 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('users', 'UserController').apiOnly()
-Route.resource('posts', 'PostsController').apiOnly()
+Route.get('/', async () => {
+  return '<h1 style="text-align:center; margin:5% 0">Go Back Bro!</h1>'
+})
+Route.group(() => {
+  Route.post('login', 'Auth/AuthController.login').as('login')
+  Route.post('register', 'Auth/AuthController.register').as('register')
+  Route.group(() => {
+    Route.resource('users', 'UsersController').apiOnly()
+    Route.resource('posts', 'PostsController').apiOnly()
+    Route.resource('comments', 'CommentsController').apiOnly()
+    Route.resource('categories', 'CategoriesController').apiOnly()
+  }).middleware('auth')
+}).prefix('api')

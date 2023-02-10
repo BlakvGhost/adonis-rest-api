@@ -1,15 +1,15 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Comment extends BaseModel {
+export default class Category extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public content: string
+  public label: string
 
   @column()
-  public postId: number
+  public desc: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
